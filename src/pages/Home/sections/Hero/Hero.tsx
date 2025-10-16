@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles"
 import Avatar from "../../../../assets/images/avatar.jpg";
-import { Container, Grid, Typography, Box } from "@mui/material"
+import { Container, Typography, Box } from "@mui/material"
 import DownloadIcon from '@mui/icons-material/Download';
 import EmailIcon from '@mui/icons-material/Email';
 import StyledButton from "../../../../components/StyledButton/StyledButton";
@@ -60,17 +60,19 @@ const Hero = () => {
         <>
             <StyledHero>
                 <Container maxWidth="md" disableGutters>
+                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center', gap: 4 }}>
+                        {/* Avatar column: on mobile it appears first (top), on desktop it's on the left */}
+                        <Box sx={{ flex: '0 0 33%', display: 'flex', justifyContent: 'center' }}>
+                            <StyledImg src={Avatar} alt="Avatar" loading="lazy" />
+                            </Box>
 
-
-                    <Grid container spacing={3} alignItems="center" sx={{ justifyContent: 'center' }} direction={{ xs: 'column', md: 'row' }}>
-                        <Box sx={{ width: { xs: '100%', md: '33.333%' }, display: 'flex', justifyContent: { xs: 'center', md: 'center' } }}>
-                            <StyledImg src={Avatar} />
-                        </Box>
-                        <Box sx={{ width: { xs: '100%', md: '66.666%' }, textAlign: 'center' }}>
+                            {/* Content column: on mobile below the avatar, on desktop on the right */}
+                        <Box sx={{ flex: '1 1 auto', textAlign: { xs: 'center', md: 'left' }, px: { xs: 0, md: 2 } }}>
                             <Typography color="primary" variant="h1" sx={{ fontSize: { xs: 'clamp(28px, 12vw, 48px)', md: '64px' }, lineHeight: 1.05, wordBreak: 'break-word', hyphens: 'auto' }}>Gabriel Lelis</Typography>
                             <Typography color="primary" variant="h2" sx={{ fontSize: { xs: 'clamp(16px, 6vw, 22px)', md: '28px' }, lineHeight: 1.2, wordBreak: 'break-word', hyphens: 'auto' }}>Desenvolvedor Full Stack Júnior</Typography>
-                            <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, flexWrap: 'wrap' }}>
-                                <Box sx={{ width: { xs: '100%', md: '33.333%' }, display: 'flex', justifyContent: 'center' }}>
+
+                            <Box sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'flex-start' }, gap: 2, mt: 3, flexWrap: 'wrap' }}>
+                                <Box sx={{ width: { xs: '100%', sm: 'auto' }, display: 'flex', justifyContent: { xs: 'center', md: 'flex-start' } }}>
                                     <a href="/assets/resume.pdf" download style={{ width: '100%', textDecoration: 'none' }} aria-label="Download CV">
                                         <StyledButton>
                                             <DownloadIcon />
@@ -78,7 +80,7 @@ const Hero = () => {
                                         </StyledButton>
                                     </a>
                                 </Box>
-                                <Box sx={{ width: { xs: '100%', md: '33.333%' }, display: 'flex', justifyContent: 'center' }}>
+                                <Box sx={{ width: { xs: '100%', sm: 'auto' }, display: 'flex', justifyContent: { xs: 'center', md: 'flex-start' } }}>
                                     <a href="mailto:hello@example.com" style={{ width: '100%', textDecoration: 'none' }} aria-label="Contact via email">
                                         <StyledButton>
                                             <EmailIcon />
@@ -88,7 +90,7 @@ const Hero = () => {
                                 </Box>
                             </Box>
                         </Box>
-                    </Grid>
+                    </Box>
                 </Container>
             </StyledHero >
         </>
