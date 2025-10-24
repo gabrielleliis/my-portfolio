@@ -4,10 +4,12 @@ import { Container, Typography, Box } from "@mui/material"
 import DownloadIcon from '@mui/icons-material/Download';
 import EmailIcon from '@mui/icons-material/Email';
 import StyledButton from "../../../../components/StyledButton/StyledButton";
+import CodeRain from "../../../../components/CodeRain";
 
 const Hero = () => {
     const StyledHero = styled("div")(({ theme }) => ({
         backgroundColor: "#1a1818ff",
+        position: 'relative',
         width: "100%",
         minHeight: "100vh",
         display: "flex",
@@ -15,7 +17,7 @@ const Hero = () => {
         flexDirection: "column",
         gap: theme.spacing(3),
         padding: theme.spacing(8, 2),
-        overflowX: "hidden",
+        overflow: "hidden",  // Importante: mantém a chuva dentro do Hero
         [theme.breakpoints.up("xs")]: {
             display: "block",
             padding: "20px",
@@ -59,12 +61,50 @@ const Hero = () => {
     return (
         <>
             <StyledHero>
-                <Container maxWidth="md" disableGutters>
-                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center', gap: 4 }}>
+                {/* Matrix Rain: desktop */}
+                <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+                    <CodeRain
+                        density={40}
+                        speed={1.4}
+                        fontSize={18}
+                        trailAlpha={0.06}
+                        headGlow={0.6}
+                        color="rgba(166,77,255,0.9)"
+                        style={{ zIndex: 0 }}
+                    />
+                </Box>
+                {/* Matrix Rain: mobile */}
+                <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+                    <CodeRain 
+                        density={32}
+                        speed={1.2}
+                        fontSize={14}
+                        trailAlpha={0.055}
+                        headGlow={0.5}
+                        color="rgba(166,77,255,0.9)"
+                        style={{ zIndex: 0 }}
+                    />
+                </Box>
+                <Container 
+                    maxWidth="md" 
+                    disableGutters 
+                    sx={{ position: 'relative', zIndex: 1 }}>
+                    <Box sx={{
+                        width: '100%',
+                        maxWidth: 1200,
+                        mx: 'auto',
+                        position: 'relative',
+                        zIndex: 1,
+                        display: 'flex',
+                        flexDirection: { xs: 'column', md: 'row' },
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: 4
+                    }}>
                         {/* Avatar column: on mobile it appears first (top), on desktop it's on the left */}
                         <Box sx={{ flex: '0 0 33%', display: 'flex', justifyContent: 'center' }}>
                             <StyledImg src={Avatar} alt="Avatar" loading="lazy" />
-                            </Box>
+                        </Box>
 
                             {/* Content column: on mobile below the avatar, on desktop on the right */}
                         <Box sx={{ flex: '1 1 auto', textAlign: { xs: 'center', md: 'left' }, px: { xs: 0, md: 2 } }}>
